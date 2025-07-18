@@ -1,0 +1,152 @@
+[
+    {
+        "id": 1,
+        "playerName": "DragonSlayer99",
+        "points": 5245,
+        "lastActive": "2024-01-15"
+    },
+    {
+        "id": 2,
+        "playerName": "ShadowHunter",
+        "points": 4823,
+        "lastActive": "2024-01-14"
+    },
+    {
+        "id": 3,
+        "playerName": "MysticWarrior",
+        "points": 4156,
+        "lastActive": "2024-01-16"
+    },
+    {
+        "id": 4,
+        "playerName": "StormBringer",
+        "points": 3742,
+        "lastActive": "2024-01-13"
+    },
+    {
+        "id": 5,
+        "playerName": "IronFist",
+        "points": 3298,
+        "lastActive": "2024-01-15"
+    },
+    {
+        "id": 6,
+        "playerName": "CrimsonBlade",
+        "points": 2874,
+        "lastActive": "2024-01-16"
+    },
+    {
+        "id": 7,
+        "playerName": "PhantomKnight",
+        "points": 2456,
+        "lastActive": "2024-01-14"
+    },
+    {
+        "id": 8,
+        "playerName": "ThunderStrike",
+        "points": 2189,
+        "lastActive": "2024-01-12"
+    },
+    {
+        "id": 9,
+        "playerName": "FrostMage",
+        "points": 1876,
+        "lastActive": "2024-01-15"
+    },
+    {
+        "id": 10,
+        "playerName": "VoidWalker",
+        "points": 1623,
+        "lastActive": "2024-01-16"
+    },
+    {
+        "id": 11,
+        "playerName": "SolarFlare",
+        "points": 1445,
+        "lastActive": "2024-01-13"
+    },
+    {
+        "id": 12,
+        "playerName": "NightStalker",
+        "points": 1298,
+        "lastActive": "2024-01-14"
+    },
+    {
+        "id": 13,
+        "playerName": "WindRunner",
+        "points": 1156,
+        "lastActive": "2024-01-15"
+    },
+    {
+        "id": 14,
+        "playerName": "EarthShaker",
+        "points": 967,
+        "lastActive": "2024-01-12"
+    },
+    {
+        "id": 15,
+        "playerName": "AquaMaster",
+        "points": 834,
+        "lastActive": "2024-01-16"
+    },
+    {
+        "id": 16,
+        "playerName": "FlameGuard",
+        "points": 723,
+        "lastActive": "2024-01-14"
+    },
+    {
+        "id": 17,
+        "playerName": "SkyWarden",
+        "points": 598,
+        "lastActive": "2024-01-13"
+    },
+    {
+        "id": 18,
+        "playerName": "DeepDiver",
+        "points": 456,
+        "lastActive": "2024-01-15"
+    },
+    {
+        "id": 19,
+        "playerName": "SwiftArrow",
+        "points": 334,
+        "lastActive": "2024-01-16"
+    },
+    {
+        "id": 20,
+        "playerName": "RockCrusher",
+        "points": 267,
+        "lastActive": "2024-01-12"
+    },
+    {
+        "id": 21,
+        "playerName": "MoonBeam",
+        "points": 189,
+        "lastActive": "2024-01-14"
+    },
+    {
+        "id": 22,
+        "playerName": "StarGazer",
+        "points": 145,
+        "lastActive": "2024-01-15"
+    },
+    {
+        "id": 23,
+        "playerName": "NewHero",
+        "points": 89,
+        "lastActive": "2024-01-16"
+    },
+    {
+        "id": 24,
+        "playerName": "FreshStart",
+        "points": 34,
+        "lastActive": "2024-01-16"
+    },
+    {
+        "id": 25,
+        "playerName": "Rookie2024",
+        "points": 12,
+        "lastActive": "2024-01-16"
+    }
+]

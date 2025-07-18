@@ -1,0 +1,188 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.leaderboard-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.leaderboard-header {
+    display: grid;
+    grid-template-columns: 80px 1fr 120px 150px;
+    gap: 20px;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    padding: 20px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.leaderboard-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.leaderboard-entry {
+    display: grid;
+    grid-template-columns: 80px 1fr 120px 150px;
+    gap: 20px;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+.leaderboard-entry:hover {
+    background-color: #f8f9fa;
+}
+
+.leaderboard-entry:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.position {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.position.rank-1 {
+    color: #FFD700;
+}
+
+.position.rank-2 {
+    color: #C0C0C0;
+}
+
+.position.rank-3 {
+    color: #CD7F32;
+}
+
+.player {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.points {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #2196F3;
+}
+
+.seniority {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.seniority-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Seniority level colors */
+.seniority-rookie { background: #9E9E9E; color: white; }
+.seniority-beginner { background: #8BC34A; color: white; }
+.seniority-apprentice { background: #4CAF50; color: white; }
+.seniority-intermediate { background: #00BCD4; color: white; }
+.seniority-advanced { background: #2196F3; color: white; }
+.seniority-expert { background: #3F51B5; color: white; }
+.seniority-master { background: #9C27B0; color: white; }
+.seniority-champion { background: #E91E63; color: white; }
+.seniority-legend { background: #FF5722; color: white; }
+.seniority-hero { background: linear-gradient(45deg, #FFD700, #FFA500); color: #333; }
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.error {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.2rem;
+    color: #f44336;
+    background: white;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .leaderboard-header,
+    .leaderboard-entry {
+        grid-template-columns: 60px 1fr 80px 120px;
+        gap: 10px;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .seniority-badge {
+        font-size: 0.8rem;
+        padding: 3px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .leaderboard-header,
+    .leaderboard-entry {
+        grid-template-columns: 1fr;
+        gap: 5px;
+        text-align: center;
+    }
+    
+    .leaderboard-header div,
+    .leaderboard-entry div {
+        padding: 5px 0;
+    }
+}
