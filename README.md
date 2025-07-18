@@ -95,6 +95,21 @@ This project follows the **MVVM (Model-View-ViewModel)** pattern:
    http://localhost:8000
    ```
 
+## 🚀 Live Demo
+
+The Gaming Leaderboard is automatically deployed to GitHub Pages via GitHub Actions:
+
+🌐 **[View Live Demo](https://opendmx.github.io/Open-Leaderboard/)**
+
+### Deployment
+
+The site automatically deploys to GitHub Pages when changes are pushed to the `main` branch. The deployment workflow:
+
+- ✅ Triggers on pushes to `main` branch
+- ✅ Uses GitHub Actions for automated deployment
+- ✅ Serves static files directly (no build process required)
+- ✅ Available at: `https://opendmx.github.io/Open-Leaderboard/`
+
 ## 🎮 Usage
 
 - **View Rankings**: Players are automatically sorted by points in descending order
@@ -161,6 +176,8 @@ Player data structure:
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+**Note**: When changes are merged to the `main` branch, the site will automatically deploy to GitHub Pages via GitHub Actions.
 
 ## 📝 License
 
