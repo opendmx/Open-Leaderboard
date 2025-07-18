@@ -70,15 +70,34 @@ This project follows the **MVVM (Model-View-ViewModel)** pattern:
 
 ### Prerequisites
 
+**For DevContainer (Recommended):**
+- VS Code with [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- Docker Desktop
+
+**For Local Development:**
 - Python 3.x (for local development server)
 - Modern web browser
 
 ### Installation & Running
 
+#### Option 1: Using DevContainer (Recommended)
+
+1. **Prerequisites**: VS Code with Dev Containers extension
+2. **Clone the repository**:
+   ```bash
+   git clone https://github.com/opendmx/Open-Leaderboard.git
+   cd Open-Leaderboard
+   ```
+3. **Open in VS Code**: `code .`
+4. **Reopen in Container**: When prompted, click "Reopen in Container"
+5. **Start development**: `npm start` (runs automatically on port 8000)
+
+#### Option 2: Local Development
+
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/opendmx/test1.git
-   cd test1
+   git clone https://github.com/opendmx/Open-Leaderboard.git
+   cd Open-Leaderboard
    ```
 
 2. **Start the development server**:
