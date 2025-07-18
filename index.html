@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Leaderboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏆 Gaming Leaderboard</h1>
+            <p>Track player rankings and achievements</p>
+        </header>
+        
+        <main>
+            <div class="leaderboard-container">
+                <div class="leaderboard-header">
+                    <div class="position">Rank</div>
+                    <div class="player">Player</div>
+                    <div class="points">Points</div>
+                    <div class="seniority">Level</div>
+                </div>
+                <div id="leaderboard-list" class="leaderboard-list">
+                    <!-- Leaderboard entries will be populated here -->
+                </div>
+            </div>
+            
+            <div class="loading" id="loading">
+                Loading leaderboard...
+            </div>
+            
+            <div class="error" id="error" style="display: none;">
+                Error loading leaderboard data.
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/models/Player.js"></script>
+    <script src="js/models/DataService.js"></script>
+    <script src="js/viewmodels/LeaderboardViewModel.js"></script>
+    <script src="js/views/LeaderboardView.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

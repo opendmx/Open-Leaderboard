@@ -1,0 +1,35 @@
+{
+  "name": "gaming-leaderboard",
+  "version": "1.0.0",
+  "description": "A gaming leaderboard website with player rankings and seniority levels",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "serve": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8000"
+  },
+  "keywords": [
+    "leaderboard",
+    "gaming",
+    "rankings",
+    "mvvm",
+    "javascript",
+    "web"
+  ],
+  "author": "Gaming Leaderboard Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/opendmx/test1.git"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not dead"
+  ]
+}
