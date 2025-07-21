@@ -10,4 +10,4 @@ steps:
 - uses: actions/add-to-project@v1
 with:
 project-url: https://github.com/users/DanielMeixner/projects/8
-github-token: ${{ secrets.GITHUB_TOKEN }}
+github-token: ${{ secrets.PROPJECTS_TOKEN }}
