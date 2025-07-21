@@ -1,13 +1,14 @@
 name: Add issues to project
-issues:
+
+on:
+  issues:
     types: [opened]
 
-
 jobs:
-add-to-project:
-runs-on: ubuntu-latest
-steps:
-- uses: actions/add-to-project@v1
-with:
-project-url: https://github.com/users/DanielMeixner/projects/8
-github-token: ${{ secrets.PROPJECTS_TOKEN }}
+  add-to-project:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v1
+        with:
+          project-url: https://github.com/users/DanielMeixner/projects/8
+          github-token: ${{ secrets.PROJECTS_TOKEN }}
