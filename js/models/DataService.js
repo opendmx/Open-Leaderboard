@@ -3,10 +3,12 @@
  * This class is designed to be easily extended for database integration
  */
 class DataService {
-    constructor() {
+    constructor(configUrl = null) {
         this.cache = null;
         this.cacheExpiry = null;
         this.cacheDuration = 5 * 60 * 1000; // 5 minutes cache
+        this.configUrl = configUrl;
+        this.configCache = null;
     }
 
     /**
@@ -21,8 +23,14 @@ class DataService {
         }
 
         try {
-            // For now, load from static file
-            const response = await this.loadFromFile();
+            let response;
+            
+            // Load from external config URL or default file
+            if (this.configUrl) {
+                response = await this.loadFromExternalConfig();
+            } else {
+                response = await this.loadFromFile();
+            }
             
             // Convert raw data to Player objects
             const players = response.map(playerData => 
@@ -30,7 +38,8 @@ class DataService {
                     playerData.id,
                     playerData.playerName,
                     playerData.points,
-                    playerData.lastActive
+                    playerData.lastActive,
+                    playerData // Pass entire playerData for flexible attributes
                 )
             );
 
@@ -58,6 +67,62 @@ class DataService {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         return await response.json();
+    }
+
+    /**
+     * Load configuration from external URL
+     * @returns {Promise<Array>} Raw player data from external config
+     */
+    async loadFromExternalConfig() {
+        if (this.configCache) {
+            return this.configCache.players || [];
+        }
+
+        const response = await fetch(this.configUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error loading external config! status: ${response.status}`);
+        }
+        
+        const config = await response.json();
+        this.configCache = config;
+
+        // Load custom CSS if specified
+        if (config.customCss) {
+            await this.loadCustomCss(config.customCss);
+        }
+
+        return config.players || [];
+    }
+
+    /**
+     * Load custom CSS file
+     * @param {string} cssUrl - URL to custom CSS file
+     */
+    async loadCustomCss(cssUrl) {
+        try {
+            // Remove any existing custom CSS
+            const existingLink = document.getElementById('custom-css');
+            if (existingLink) {
+                existingLink.remove();
+            }
+
+            // Add new custom CSS
+            const link = document.createElement('link');
+            link.id = 'custom-css';
+            link.rel = 'stylesheet';
+            link.href = cssUrl;
+            document.head.appendChild(link);
+        } catch (error) {
+            console.warn('Failed to load custom CSS:', error);
+        }
+    }
+
+    /**
+     * Get configuration (for external configs)
+     * @returns {object} Configuration object
+     */
+    getConfig() {
+        return this.configCache || {};
     }
 
     /**

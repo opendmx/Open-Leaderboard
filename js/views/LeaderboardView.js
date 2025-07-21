@@ -58,6 +58,9 @@ class LeaderboardView {
     renderLeaderboard(players) {
         if (!this.elements.leaderboardList) return;
 
+        // Update header with custom configuration if available
+        this.updateHeaderFromConfig();
+
         // Clear existing content
         this.elements.leaderboardList.innerHTML = '';
 
@@ -81,6 +84,25 @@ class LeaderboardView {
     }
 
     /**
+     * Update header from configuration
+     */
+    updateHeaderFromConfig() {
+        const config = this.viewModel.getConfig();
+        if (config.title) {
+            const titleElement = document.querySelector('header h1');
+            if (titleElement) {
+                titleElement.textContent = config.title;
+            }
+        }
+        if (config.subtitle) {
+            const subtitleElement = document.querySelector('header p');
+            if (subtitleElement) {
+                subtitleElement.textContent = config.subtitle;
+            }
+        }
+    }
+
+    /**
      * Create a single leaderboard entry element
      * @param {Player} player - Player object
      * @param {number} index - Index in the list
@@ -96,11 +118,104 @@ class LeaderboardView {
 
         const positionClass = player.position <= 3 ? `rank-${player.position}` : '';
 
-        entry.innerHTML = `
+        // Generate content based on config or default structure
+        const config = this.viewModel.getConfig();
+        let entryContent;
+
+        if (config.columns && config.columns.length > 0) {
+            // Use custom column configuration
+            entryContent = this.renderCustomColumns(player, config.columns, positionClass);
+        } else {
+            // Use default structure
+            entryContent = this.renderDefaultColumns(player, positionClass);
+        }
+
+        entry.innerHTML = entryContent;
+
+        // Add link if player has one
+        if (player.link) {
+            entry.style.cursor = 'pointer';
+            entry.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.open(player.link, '_blank');
+            });
+        }
+
+        // Add hover effect for additional info
+        this.addPlayerHoverEffect(entry, player);
+
+        return entry;
+    }
+
+    /**
+     * Render custom columns based on configuration
+     * @param {Player} player - Player object
+     * @param {Array} columns - Column configuration
+     * @param {string} positionClass - CSS class for position
+     * @returns {string} HTML content
+     */
+    renderCustomColumns(player, columns, positionClass) {
+        return columns.map(column => {
+            let content = '';
+            let cssClass = column.class || '';
+
+            switch (column.field) {
+                case 'position':
+                    content = player.getFormattedPosition();
+                    cssClass += ` position ${positionClass}`;
+                    break;
+                case 'playerName':
+                    content = this.escapeHtml(player.playerName);
+                    if (player.isActive()) {
+                        content += '<span style="color: #4CAF50; margin-left: 5px;">●</span>';
+                    }
+                    cssClass += ' player';
+                    break;
+                case 'points':
+                    content = player.getFormattedPoints();
+                    cssClass += ' points';
+                    break;
+                case 'seniority':
+                    content = `<span class="seniority-badge ${player.seniority.class}">${player.seniority.level}</span>`;
+                    cssClass += ' seniority';
+                    break;
+                case 'icon':
+                    if (player.icon) {
+                        content = `<img src="${this.escapeHtml(player.icon)}" alt="Player icon" class="player-icon" />`;
+                    }
+                    break;
+                case 'image':
+                    if (player.image) {
+                        content = `<img src="${this.escapeHtml(player.image)}" alt="Player image" class="player-image" />`;
+                    }
+                    break;
+                default:
+                    // Handle custom attributes
+                    if (player.customAttributes[column.field] !== undefined) {
+                        content = this.escapeHtml(String(player.customAttributes[column.field]));
+                    } else if (player.rawData[column.field] !== undefined) {
+                        content = this.escapeHtml(String(player.rawData[column.field]));
+                    }
+                    break;
+            }
+
+            return `<div class="${cssClass.trim()}">${content}</div>`;
+        }).join('');
+    }
+
+    /**
+     * Render default columns
+     * @param {Player} player - Player object
+     * @param {string} positionClass - CSS class for position
+     * @returns {string} HTML content
+     */
+    renderDefaultColumns(player, positionClass) {
+        return `
             <div class="position ${positionClass}">
                 ${player.getFormattedPosition()}
             </div>
             <div class="player">
+                ${player.icon ? `<img src="${this.escapeHtml(player.icon)}" alt="Player icon" class="player-icon" />` : ''}
                 ${this.escapeHtml(player.playerName)}
                 ${player.isActive() ? '<span style="color: #4CAF50; margin-left: 5px;">●</span>' : ''}
             </div>
@@ -113,11 +228,6 @@ class LeaderboardView {
                 </span>
             </div>
         `;
-
-        // Add hover effect for additional info
-        this.addPlayerHoverEffect(entry, player);
-
-        return entry;
     }
 
     /**
@@ -168,7 +278,7 @@ class LeaderboardView {
             pointer-events: none;
         `;
 
-        tooltip.innerHTML = `
+        let tooltipContent = `
             <strong>${this.escapeHtml(player.playerName)}</strong><br>
             Position: ${player.position}<br>
             Points: ${player.getFormattedPoints()}<br>
@@ -176,6 +286,16 @@ class LeaderboardView {
             Last Active: ${new Date(player.lastActive).toLocaleDateString()}<br>
             Status: ${player.isActive() ? 'Active' : 'Inactive'}
         `;
+
+        // Add custom attributes to tooltip
+        if (Object.keys(player.customAttributes).length > 0) {
+            tooltipContent += '<br><br><strong>Additional Info:</strong><br>';
+            Object.entries(player.customAttributes).forEach(([key, value]) => {
+                tooltipContent += `${this.escapeHtml(key)}: ${this.escapeHtml(String(value))}<br>`;
+            });
+        }
+
+        tooltip.innerHTML = tooltipContent;
 
         return tooltip;
     }

@@ -27,6 +27,14 @@ class App {
         try {
             this.log('Initializing Gaming Leaderboard...');
 
+            // Parse URL parameters for external config
+            this.configUrl = this.parseConfigUrl();
+            if (this.configUrl) {
+                this.log(`Using external config: ${this.configUrl}`);
+            } else {
+                this.log('Using default configuration');
+            }
+
             // Check if DOM is ready
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', () => this.start());
@@ -40,14 +48,23 @@ class App {
     }
 
     /**
+     * Parse URL parameters to get config URL
+     * @returns {string|null} Config URL or null if not provided
+     */
+    parseConfigUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('config');
+    }
+
+    /**
      * Start the application
      */
     async start() {
         try {
             this.log('Starting application...');
 
-            // Initialize ViewModel
-            this.viewModel = new LeaderboardViewModel();
+            // Initialize ViewModel with config URL
+            this.viewModel = new LeaderboardViewModel(this.configUrl);
             
             // Initialize View
             this.view = new LeaderboardView(this.viewModel);

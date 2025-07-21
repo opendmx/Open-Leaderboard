@@ -1,0 +1,139 @@
+{
+  "title": "Custom Gaming Tournament",
+  "subtitle": "Track tournament rankings and achievements",
+  "customCss": "tournament-theme.css",
+  "paging": {
+    "enabled": false,
+    "itemsPerPage": 10
+  },
+  "columns": [
+    {
+      "field": "position",
+      "label": "Rank",
+      "class": "position"
+    },
+    {
+      "field": "icon",
+      "label": "Avatar",
+      "class": "icon"
+    },
+    {
+      "field": "playerName",
+      "label": "Player",
+      "class": "player"
+    },
+    {
+      "field": "points",
+      "label": "Score",
+      "class": "points"
+    },
+    {
+      "field": "team",
+      "label": "Team",
+      "class": "team"
+    },
+    {
+      "field": "seniority",
+      "label": "Level",
+      "class": "seniority"
+    }
+  ],
+  "players": [
+    {
+      "id": 1,
+      "playerName": "ProGamer2024",
+      "points": 9850,
+      "lastActive": "2024-01-16",
+      "icon": "https://via.placeholder.com/40/4CAF50/FFFFFF?text=PG",
+      "team": "Alpha Squad",
+      "country": "USA",
+      "link": "https://example.com/player/1"
+    },
+    {
+      "id": 2,
+      "playerName": "EliteSniper",
+      "points": 9420,
+      "lastActive": "2024-01-15",
+      "icon": "https://via.placeholder.com/40/2196F3/FFFFFF?text=ES",
+      "team": "Beta Team",
+      "country": "Canada",
+      "link": "https://example.com/player/2"
+    },
+    {
+      "id": 3,
+      "playerName": "MasterChief",
+      "points": 8900,
+      "lastActive": "2024-01-16",
+      "icon": "https://via.placeholder.com/40/FF5722/FFFFFF?text=MC",
+      "team": "Gamma Force",
+      "country": "UK",
+      "achievements": ["First Blood", "Triple Kill", "Tournament Winner"],
+      "link": "https://example.com/player/3"
+    },
+    {
+      "id": 4,
+      "playerName": "NinjaWarrior",
+      "points": 8340,
+      "lastActive": "2024-01-14",
+      "icon": "https://via.placeholder.com/40/9C27B0/FFFFFF?text=NW",
+      "team": "Delta Squad",
+      "country": "Japan",
+      "speciality": "Stealth Operations"
+    },
+    {
+      "id": 5,
+      "playerName": "TechMaster",
+      "points": 7890,
+      "lastActive": "2024-01-16",
+      "icon": "https://via.placeholder.com/40/00BCD4/FFFFFF?text=TM",
+      "team": "Alpha Squad",
+      "country": "Germany",
+      "speciality": "Tech Support"
+    },
+    {
+      "id": 6,
+      "playerName": "StealthHunter",
+      "points": 7420,
+      "lastActive": "2024-01-15",
+      "icon": "https://via.placeholder.com/40/8BC34A/FFFFFF?text=SH",
+      "team": "Beta Team",
+      "country": "Australia"
+    },
+    {
+      "id": 7,
+      "playerName": "RapidFire",
+      "points": 6980,
+      "lastActive": "2024-01-14",
+      "icon": "https://via.placeholder.com/40/FFC107/000000?text=RF",
+      "team": "Gamma Force",
+      "country": "Brazil"
+    },
+    {
+      "id": 8,
+      "playerName": "CyberNinja",
+      "points": 6530,
+      "lastActive": "2024-01-16",
+      "icon": "https://via.placeholder.com/40/E91E63/FFFFFF?text=CN",
+      "team": "Delta Squad",
+      "country": "South Korea"
+    },
+    {
+      "id": 9,
+      "playerName": "PhantomStrike",
+      "points": 6120,
+      "lastActive": "2024-01-13",
+      "icon": "https://via.placeholder.com/40/3F51B5/FFFFFF?text=PS",
+      "team": "Alpha Squad",
+      "country": "France"
+    },
+    {
+      "id": 10,
+      "playerName": "CodeBreaker",
+      "points": 5780,
+      "lastActive": "2024-01-15",
+      "icon": "https://via.placeholder.com/40/607D8B/FFFFFF?text=CB",
+      "team": "Beta Team",
+      "country": "Sweden"
+    }
+  ]
+}
