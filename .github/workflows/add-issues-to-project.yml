@@ -1,5 +1,7 @@
 name: Add issues to project
-on:
+issues:
+    types: [opened]
+
 issues:
 types: [opened]
 
