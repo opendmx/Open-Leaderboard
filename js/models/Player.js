@@ -18,23 +18,35 @@ class Player {
      */
     calculateSeniority(points) {
         const seniorityLevels = [
-            { min: 0, max: 99, level: 'Rookie', class: 'seniority-rookie' },
-            { min: 100, max: 299, level: 'Beginner', class: 'seniority-beginner' },
-            { min: 300, max: 599, level: 'Apprentice', class: 'seniority-apprentice' },
-            { min: 600, max: 999, level: 'Intermediate', class: 'seniority-intermediate' },
-            { min: 1000, max: 1499, level: 'Advanced', class: 'seniority-advanced' },
-            { min: 1500, max: 2199, level: 'Expert', class: 'seniority-expert' },
-            { min: 2200, max: 2999, level: 'Master', class: 'seniority-master' },
-            { min: 3000, max: 3999, level: 'Champion', class: 'seniority-champion' },
-            { min: 4000, max: 4999, level: 'Legend', class: 'seniority-legend' },
-            { min: 5000, max: Infinity, level: 'Hero', class: 'seniority-hero' }
+            { min: 0, max: 99, level: 'rookie', class: 'seniority-rookie' },
+            { min: 100, max: 299, level: 'beginner', class: 'seniority-beginner' },
+            { min: 300, max: 599, level: 'apprentice', class: 'seniority-apprentice' },
+            { min: 600, max: 999, level: 'intermediate', class: 'seniority-intermediate' },
+            { min: 1000, max: 1499, level: 'advanced', class: 'seniority-advanced' },
+            { min: 1500, max: 2199, level: 'expert', class: 'seniority-expert' },
+            { min: 2200, max: 2999, level: 'master', class: 'seniority-master' },
+            { min: 3000, max: 3999, level: 'champion', class: 'seniority-champion' },
+            { min: 4000, max: 4999, level: 'legend', class: 'seniority-legend' },
+            { min: 5000, max: Infinity, level: 'hero', class: 'seniority-hero' }
         ];
 
         const seniority = seniorityLevels.find(level => 
             points >= level.min && points <= level.max
         );
 
-        return seniority || seniorityLevels[0]; // Default to Rookie if not found
+        return seniority || seniorityLevels[0]; // Default to rookie if not found
+    }
+
+    /**
+     * Get translated seniority level name
+     * @returns {string} Translated seniority level
+     */
+    getSeniorityDisplayName() {
+        if (typeof i18n !== 'undefined') {
+            return i18n.t(`seniority.${this.seniority.level}`);
+        }
+        // Fallback for when i18n is not loaded yet
+        return this.seniority.level.charAt(0).toUpperCase() + this.seniority.level.slice(1);
     }
 
     /**

@@ -46,6 +46,9 @@ class App {
         try {
             this.log('Starting application...');
 
+            // Initialize language system
+            this.initializeLanguageSystem();
+
             // Initialize ViewModel
             this.viewModel = new LeaderboardViewModel();
             
@@ -67,6 +70,25 @@ class App {
 
         } catch (error) {
             this.handleError('Failed to start application', error);
+        }
+    }
+
+    /**
+     * Initialize language system
+     */
+    initializeLanguageSystem() {
+        if (typeof i18n !== 'undefined') {
+            // Apply initial language to page
+            document.documentElement.lang = i18n.getCurrentLanguage();
+            document.title = i18n.t('app.title');
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (key) {
+                    element.textContent = i18n.t(key);
+                }
+            });
         }
     }
 
@@ -109,7 +131,10 @@ class App {
         
         // Show user-friendly error message
         if (this.viewModel) {
-            this.viewModel.setError('Something went wrong. Please try refreshing the page.');
+            const errorMsg = typeof i18n !== 'undefined' ? 
+                i18n.t('app.error.general') : 
+                'Something went wrong. Please try refreshing the page.';
+            this.viewModel.setError(errorMsg);
         }
 
         // In a production environment, you might want to send error reports
