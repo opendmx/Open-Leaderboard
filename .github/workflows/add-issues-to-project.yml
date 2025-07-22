@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: actions/add-to-project@v0.6.0
         with:
-            github-token: ${{ secrets.GITHUB_TOKEN }}
+            github-token: ${{ secrets.PROPJECTS_TOKEN }}
