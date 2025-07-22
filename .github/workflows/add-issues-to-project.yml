@@ -10,5 +10,5 @@ jobs:
     steps:
       - uses: actions/add-to-project@v0.6.0
         with:
-            github-token: ${{ secrets.PROPJECTS_TOKEN }}
+            github-token: ${{ secrets.PROJECTS_TOKEN }}
             project-url: https://github.com/users/DanielMeixner/projects/8
