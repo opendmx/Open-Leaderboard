@@ -8,11 +8,14 @@ class LeaderboardView {
         this.elements = {
             leaderboardList: document.getElementById('leaderboard-list'),
             loading: document.getElementById('loading'),
-            error: document.getElementById('error')
+            error: document.getElementById('error'),
+            languageSelector: document.getElementById('language-selector')
         };
 
         this.bindEvents();
         this.subscribeToViewModel();
+        this.subscribeToLanguageChanges();
+        this.initializeLanguageSelector();
     }
 
     /**
@@ -26,7 +29,14 @@ class LeaderboardView {
                 this.viewModel.refreshLeaderboard();
             });
             header.style.cursor = 'pointer';
-            header.title = 'Click to refresh leaderboard';
+            header.title = i18n.t('app.refresh');
+        }
+
+        // Language selector event
+        if (this.elements.languageSelector) {
+            this.elements.languageSelector.addEventListener('change', (e) => {
+                i18n.setLanguage(e.target.value);
+            });
         }
     }
 
@@ -49,6 +59,56 @@ class LeaderboardView {
         this.viewModel.subscribe('statsChanged', (stats) => {
             this.updateStats(stats);
         });
+    }
+
+    /**
+     * Subscribe to language changes
+     */
+    subscribeToLanguageChanges() {
+        if (typeof i18n !== 'undefined') {
+            i18n.subscribe((language) => {
+                this.updateLanguage();
+            });
+        }
+    }
+
+    /**
+     * Initialize language selector
+     */
+    initializeLanguageSelector() {
+        if (this.elements.languageSelector && typeof i18n !== 'undefined') {
+            this.elements.languageSelector.value = i18n.getCurrentLanguage();
+        }
+    }
+
+    /**
+     * Update all translatable content
+     */
+    updateLanguage() {
+        // Update document title
+        document.title = i18n.t('app.title');
+        
+        // Update HTML lang attribute
+        document.documentElement.lang = i18n.getCurrentLanguage();
+        
+        // Update all elements with data-i18n attributes
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (key) {
+                element.textContent = i18n.t(key);
+            }
+        });
+
+        // Update header title tooltip
+        const header = document.querySelector('header h1');
+        if (header) {
+            header.title = i18n.t('app.refresh');
+        }
+
+        // Re-render leaderboard to update seniority levels
+        if (this.viewModel.hasData()) {
+            this.renderLeaderboard(this.viewModel.getPlayers());
+        }
     }
 
     /**
@@ -109,7 +169,7 @@ class LeaderboardView {
             </div>
             <div class="seniority">
                 <span class="seniority-badge ${player.seniority.class}">
-                    ${player.seniority.level}
+                    ${player.getSeniorityDisplayName()}
                 </span>
             </div>
         `;
@@ -170,11 +230,11 @@ class LeaderboardView {
 
         tooltip.innerHTML = `
             <strong>${this.escapeHtml(player.playerName)}</strong><br>
-            Position: ${player.position}<br>
-            Points: ${player.getFormattedPoints()}<br>
-            Level: ${player.seniority.level}<br>
-            Last Active: ${new Date(player.lastActive).toLocaleDateString()}<br>
-            Status: ${player.isActive() ? 'Active' : 'Inactive'}
+            ${i18n.t('leaderboard.rank')}: ${player.position}<br>
+            ${i18n.t('leaderboard.points')}: ${player.getFormattedPoints()}<br>
+            ${i18n.t('leaderboard.level')}: ${player.getSeniorityDisplayName()}<br>
+            ${i18n.t('tooltip.lastActive')}: ${new Date(player.lastActive).toLocaleDateString()}<br>
+            ${i18n.t('tooltip.status')}: ${player.isActive() ? i18n.t('tooltip.active') : i18n.t('tooltip.inactive')}
         `;
 
         return tooltip;

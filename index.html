@@ -9,33 +9,48 @@
 <body>
     <div class="container">
         <header>
-            <h1>🏆 Gaming Leaderboard</h1>
-            <p>Track player rankings and achievements</p>
+            <div class="header-content">
+                <div class="title-section">
+                    <h1 data-i18n="app.title">🏆 Gaming Leaderboard</h1>
+                    <p data-i18n="app.subtitle">Track player rankings and achievements</p>
+                </div>
+                <div class="language-selector">
+                    <select id="language-selector" title="Select Language">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="de">Deutsch</option>
+                    </select>
+                </div>
+            </div>
         </header>
         
         <main>
             <div class="leaderboard-container">
                 <div class="leaderboard-header">
-                    <div class="position">Rank</div>
-                    <div class="player">Player</div>
-                    <div class="points">Points</div>
-                    <div class="seniority">Level</div>
+                    <div class="position" data-i18n="leaderboard.rank">Rank</div>
+                    <div class="player" data-i18n="leaderboard.player">Player</div>
+                    <div class="points" data-i18n="leaderboard.points">Points</div>
+                    <div class="seniority" data-i18n="leaderboard.level">Level</div>
                 </div>
                 <div id="leaderboard-list" class="leaderboard-list">
                     <!-- Leaderboard entries will be populated here -->
                 </div>
             </div>
             
-            <div class="loading" id="loading">
+            <div class="loading" id="loading" data-i18n="app.loading">
                 Loading leaderboard...
             </div>
             
-            <div class="error" id="error" style="display: none;">
+            <div class="error" id="error" style="display: none;" data-i18n="app.error">
                 Error loading leaderboard data.
             </div>
         </main>
     </div>
     
+    <script src="js/i18n/i18n.js"></script>
+    <script src="js/i18n/en.js"></script>
+    <script src="js/i18n/es.js"></script>
+    <script src="js/i18n/de.js"></script>
     <script src="js/models/Player.js"></script>
     <script src="js/models/DataService.js"></script>
     <script src="js/viewmodels/LeaderboardViewModel.js"></script>
