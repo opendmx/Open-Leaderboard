@@ -186,3 +186,26 @@ header p {
         padding: 5px 0;
     }
 }
+
+/* Player icons and images */
+.player-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.player-image {
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+/* Clickable entries */
+.leaderboard-entry[style*="cursor: pointer"]:hover {
+    background: #f8f9fa;
+    transform: translateX(5px);
+}

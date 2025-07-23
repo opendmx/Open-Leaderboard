@@ -3,8 +3,8 @@
  * Implements the ViewModel layer in MVVM pattern
  */
 class LeaderboardViewModel {
-    constructor() {
-        this.dataService = new DataService();
+    constructor(configUrl = null) {
+        this.dataService = new DataService(configUrl);
         this.players = [];
         this.isLoading = false;
         this.error = null;
@@ -197,5 +197,13 @@ class LeaderboardViewModel {
      */
     hasData() {
         return this.players && this.players.length > 0;
+    }
+
+    /**
+     * Get configuration for the view
+     * @returns {object} Configuration object
+     */
+    getConfig() {
+        return this.dataService.getConfig();
     }
 }

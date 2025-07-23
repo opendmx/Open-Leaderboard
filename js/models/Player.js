@@ -2,13 +2,29 @@
  * Player Model - Represents a player in the leaderboard
  */
 class Player {
-    constructor(id, playerName, points, lastActive) {
+    constructor(id, playerName, points, lastActive, rawData = {}) {
         this.id = id;
         this.playerName = playerName;
         this.points = points;
         this.lastActive = lastActive;
         this.position = 0; // Will be set by the ViewModel
         this.seniority = this.calculateSeniority(points);
+        
+        // Store all raw data for flexible attributes
+        this.rawData = rawData;
+        
+        // Extract common optional attributes
+        this.icon = rawData.icon || null;
+        this.image = rawData.image || null;
+        this.link = rawData.link || null;
+        
+        // Store any additional custom attributes
+        this.customAttributes = {};
+        Object.keys(rawData).forEach(key => {
+            if (!['id', 'playerName', 'points', 'lastActive', 'icon', 'image', 'link'].includes(key)) {
+                this.customAttributes[key] = rawData[key];
+            }
+        });
     }
 
     /**

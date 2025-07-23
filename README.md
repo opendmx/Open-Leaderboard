@@ -8,6 +8,9 @@ A modern, responsive leaderboard website for tracking player rankings and achiev
 
 - **Player Rankings**: Display players ranked by points with position indicators
 - **Seniority System**: 10 different skill levels based on points earned
+- **Flexible Configuration**: Load custom player data and styling via external JSON files
+- **Custom Styling**: Override default themes with custom CSS files
+- **External Links**: Clickable player entries that link to external profiles
 - **Responsive Design**: Works on desktop, tablet, and mobile devices
 - **Interactive UI**: Hover tooltips showing detailed player information
 - **Real-time Updates**: Click header to refresh leaderboard data
@@ -51,6 +54,9 @@ This project follows the **MVVM (Model-View-ViewModel)** pattern:
 │   └── app.js                # Application entry point
 ├── data/
 │   └── leaderboard.json      # Static player data
+├── sample-config.json        # Example external configuration
+├── tournament-theme.css      # Example custom theme
+├── CONFIGURATION.md          # Configuration guide
 └── package.json              # Project configuration
 ```
 
@@ -131,10 +137,20 @@ The site automatically deploys to GitHub Pages when changes are pushed to the `m
 
 ## 🎮 Usage
 
+### Basic Usage
 - **View Rankings**: Players are automatically sorted by points in descending order
 - **Hover for Details**: Hover over any player to see detailed information
 - **Refresh Data**: Click the header title to refresh the leaderboard
 - **Responsive**: View on any device - the layout adapts automatically
+
+### Flexible Configuration
+- **Default Mode**: Visit `http://localhost:8000` for the standard leaderboard
+- **Custom Config**: Use `http://localhost:8000?config=your-config.json` to load external configuration
+- **External Data**: Load player data from any JSON file or API endpoint
+- **Custom Styling**: Apply custom themes via CSS files specified in configuration
+- **Interactive Elements**: Players with links become clickable and open in new tabs
+
+📖 **[View Configuration Guide](CONFIGURATION.md)** for detailed setup instructions and examples.
 
 ## 🔮 Future Enhancements
 
