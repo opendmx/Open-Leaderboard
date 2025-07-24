@@ -1,4 +1,4 @@
-name: Add issues to project
+name: Add Issue to Personal Project
 
 on:
   issues:
@@ -8,7 +8,27 @@ jobs:
   add-to-project:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/add-to-project@v0.6.0
-        with:
-            github-token: ${{ secrets.PROJECTS_TOKEN }}
-            project-url: https://github.com/users/DanielMeixner/projects/8
+      - name: Add issue to personal project (Project Beta)
+        env:
+          GH_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+        run: |
+          # Get the node ID of the issue using GitHub GraphQL API
+          ISSUE_ID=$(gh api graphql -F url="$ISSUE_URL" -f query='
+            query($url: URI!) {
+              resource(url: $url) {
+                ... on Issue {
+                  id
+                }
+              }
+            }' --jq '.data.resource.id')
+
+          # Add the issue to the project (Project Beta) using GraphQL API
+          gh api graphql -F projectId="PROJECT_ID" -F contentId="$ISSUE_ID" -f query='
+            mutation($projectId: ID!, $contentId: ID!) {
+              addProjectV2ItemById(input: {projectId: $projectId, contentId: $contentId}) {
+                item {
+                  id
+                }
+              }
+            }'
