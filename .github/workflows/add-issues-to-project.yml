@@ -8,7 +8,7 @@ jobs:
   add-to-project:
     runs-on: ubuntu-latest
     steps:
-      - name: Add issue to personal project (Project Beta)
+      - name: Add issue to personal project (Projects v2)
         env:
           GH_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
           ISSUE_URL: ${{ github.event.issue.html_url }}
@@ -23,10 +23,10 @@ jobs:
               }
             }' --jq '.data.resource.id')
 
-          # Add the issue to the project (Project Beta) using GraphQL API
+          # Add the issue to your Projects v2 (Project Beta) using the correct mutation
           gh api graphql -F projectId="PROJECT_ID" -F contentId="$ISSUE_ID" -f query='
             mutation($projectId: ID!, $contentId: ID!) {
-              addProjectV2ItemById(input: {projectId: $projectId, contentId: $contentId}) {
+              addProjectV2Item(input: {projectId: $projectId, contentId: $contentId}) {
                 item {
                   id
                 }
