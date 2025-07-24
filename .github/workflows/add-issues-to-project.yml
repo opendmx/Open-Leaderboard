@@ -1,4 +1,4 @@
-name: Add Issue to Personal Project
+name: Add Issue to Personal Project (Projects v2)
 
 on:
   issues:
@@ -8,12 +8,15 @@ jobs:
   add-to-project:
     runs-on: ubuntu-latest
     steps:
-      - name: Add issue to personal project (Projects v2)
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get the node ID of the issue using GitHub GraphQL API
         env:
           GH_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
           ISSUE_URL: ${{ github.event.issue.html_url }}
+        id: get_issue_id
         run: |
-          # Get the node ID of the issue using GitHub GraphQL API
           ISSUE_ID=$(gh api graphql -F url="$ISSUE_URL" -f query='
             query($url: URI!) {
               resource(url: $url) {
@@ -22,13 +25,15 @@ jobs:
                 }
               }
             }' --jq '.data.resource.id')
+          echo "ISSUE_ID=$ISSUE_ID" >> $GITHUB_ENV
 
-          # Add the issue to your Projects v2 (Project Beta) using the correct mutation
-          gh api graphql -F projectId="PROJECT_ID" -F contentId="$ISSUE_ID" -f query='
+      - name: Add the issue to your Projects v2
+        env:
+          GH_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
+        run: |
+          gh api graphql -F projectId="PVT_kwHOAGSkCc4A-ChK" -F contentId="$ISSUE_ID" -f query='
             mutation($projectId: ID!, $contentId: ID!) {
-              addProjectV2Item(input: {projectId: $projectId, contentId: $contentId}) {
-                item {
-                  id
-                }
+              addProjectV2ItemById(input: {projectId: $projectId, contentId: $contentId}) {
+                item { id }
               }
             }'
