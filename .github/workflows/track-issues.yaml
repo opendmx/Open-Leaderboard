@@ -28,4 +28,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Track issue changes
-        uses: DanielMeixner/Actions/issues-change-tracker@v1.0.2
+        uses: DanielMeixner/Actions/issues-change-tracker@v1.0.3
