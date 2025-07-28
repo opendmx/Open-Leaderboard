@@ -23,6 +23,50 @@ header {
     color: white;
 }
 
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.title-section {
+    flex: 1;
+    text-align: center;
+}
+
+.language-selector {
+    min-width: 120px;
+}
+
+.language-selector select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.language-selector select:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.language-selector select:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: white;
+}
+
+.language-selector option {
+    background: #667eea;
+    color: white;
+}
+
 header h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
@@ -155,6 +199,15 @@ header p {
 
 /* Responsive design */
 @media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .title-section {
+        text-align: center;
+    }
+    
     .leaderboard-header,
     .leaderboard-entry {
         grid-template-columns: 60px 1fr 80px 120px;
